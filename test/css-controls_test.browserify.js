@@ -19,7 +19,8 @@ function createStyleSheet() {
 function addRule(styleSheet, selector, property) {
   // if we are on IE, use addRule
   if (styleSheet.addRule) {
-    return styleSheet.addRule(selector, property);
+    styleSheet.addRule(selector, property);
+    return styleSheet.rules.length - 1;
   } else {
   // Otherwise, generate the rule and append it
     var rule = selector + '{' + property + '}';
@@ -27,9 +28,22 @@ function addRule(styleSheet, selector, property) {
   }
 }
 
+// Define rule removal
+function removeRule(styleSheet, index) {
+  // if we are on IE, use removeRule
+  if (styleSheet.removeRule) {
+    return styleSheet.removeRule(index);
+  } else {
+  // Otherwise, use deleteRule
+    return styleSheet.deleteRule(index);
+  }
+}
+
+// Export our methods
 module.exports = {
   createStyleSheet: createStyleSheet,
-  addRule: addRule
+  addRule: addRule,
+  removeRule: removeRule
 };
 },{}],2:[function(require,module,exports){
 // Create and expose assertion methods (node assertion messages suck in browser)
@@ -104,9 +118,6 @@ describe('css-controls', function () {
 
       // Remove the element from the DOM
       body.removeChild(p);
-
-      // Save the styled element for later
-      this.styledElt = p;
     });
 
     it('does not style non-relevant elements', function () {
@@ -125,8 +136,22 @@ describe('css-controls', function () {
   });
 
   describe('removing a CSS rule', function () {
+    before(function () {
+      cssControls.removeRule(this.styleSheet, this.ruleIndex);
+    });
     it('removes styles from relevant elements', function () {
+      // Create and append our test element
+      var body = document.body,
+          p = document.createElement('p');
+      p.className = 'style-me';
+      body.appendChild(p);
 
+      // Get the element style and assert
+      var fontSize = computedStyle(p, 'font-size');
+      assert.notEqual(fontSize, '50px');
+
+      // Remove the element from the DOM
+      body.removeChild(p);
     });
   });
 });

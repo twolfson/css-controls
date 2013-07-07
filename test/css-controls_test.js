@@ -53,9 +53,6 @@ describe('css-controls', function () {
 
       // Remove the element from the DOM
       body.removeChild(p);
-
-      // Save the styled element for later
-      this.styledElt = p;
     });
 
     it('does not style non-relevant elements', function () {
@@ -74,8 +71,22 @@ describe('css-controls', function () {
   });
 
   describe('removing a CSS rule', function () {
+    before(function () {
+      cssControls.removeRule(this.styleSheet, this.ruleIndex);
+    });
     it('removes styles from relevant elements', function () {
+      // Create and append our test element
+      var body = document.body,
+          p = document.createElement('p');
+      p.className = 'style-me';
+      body.appendChild(p);
 
+      // Get the element style and assert
+      var fontSize = computedStyle(p, 'font-size');
+      assert.notEqual(fontSize, '50px');
+
+      // Remove the element from the DOM
+      body.removeChild(p);
     });
   });
 });
