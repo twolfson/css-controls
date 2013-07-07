@@ -7,6 +7,19 @@ var cssControls = require('../lib/css-controls.js'),
 var docElt = document.documentElement,
     head = document.getElementsByTagName('head')[0];
 
+// Helper test fns
+function fixtureNode(tagName) {
+  before(function () {
+    // Create and append our test element
+    var node = document.createElement(tagName);
+    document.body.appendChild(node);
+    this.node = node;
+  });
+  after(function () {
+    document.body.removeChild(this.node);
+  });
+}
+
 // Basic tests
 describe('css-controls', function () {
   describe('creating a stylesheet', function () {
@@ -40,33 +53,27 @@ describe('css-controls', function () {
     before(function () {
       this.ruleIndex = cssControls.addRule(this.styleSheet, '.style-me', 'font-size: 50px');
     });
-    it('styles relevant elements', function () {
-      // Create and append our test element
-      var body = document.body,
-          p = document.createElement('p');
-      p.className = 'style-me';
-      body.appendChild(p);
 
-      // Get the element style and assert
-      var fontSize = computedStyle(p, 'font-size');
-      assert.strictEqual(fontSize, '50px');
+    describe('. A relevant element', function () {
+      fixtureNode('p');
+      before(function () {
+        this.node.className = 'style-me';
+        console.log(this.node);
+      });
 
-      // Remove the element from the DOM
-      body.removeChild(p);
+      it('is styled', function () {
+        var fontSize = computedStyle(this.node, 'font-size');
+        assert.strictEqual(fontSize, '50px');
+      });
     });
 
-    it('does not style non-relevant elements', function () {
-      // Create and append our test element
-      var body = document.body,
-          p = document.createElement('p');
-      body.appendChild(p);
+    describe('. A non-relevant element', function () {
+      fixtureNode('p');
 
-      // Get the element style and assert
-      var fontSize = computedStyle(p, 'font-size');
-      assert.notEqual(fontSize, '50px');
-
-      // Remove the element from the DOM
-      body.removeChild(p);
+      it('is not styled', function () {
+        var fontSize = computedStyle(this.node, 'font-size');
+        assert.notEqual(fontSize, '50px');
+      });
     });
   });
 
@@ -74,19 +81,17 @@ describe('css-controls', function () {
     before(function () {
       cssControls.removeRule(this.styleSheet, this.ruleIndex);
     });
-    it('removes styles from relevant elements', function () {
-      // Create and append our test element
-      var body = document.body,
-          p = document.createElement('p');
-      p.className = 'style-me';
-      body.appendChild(p);
 
-      // Get the element style and assert
-      var fontSize = computedStyle(p, 'font-size');
-      assert.notEqual(fontSize, '50px');
+    describe('. A formerly relevant element', function () {
+      fixtureNode('p');
+      before(function () {
+        this.node.className = 'style-me';
+      });
 
-      // Remove the element from the DOM
-      body.removeChild(p);
+      it('is not styled', function () {
+        var fontSize = computedStyle(this.node, 'font-size');
+        assert.notEqual(fontSize, '50px');
+      });
     });
   });
 });
