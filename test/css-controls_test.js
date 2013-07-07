@@ -7,16 +7,12 @@ var cssControls = require('../lib/css-controls.js'),
 describe('css-controls', function () {
   describe('creating a stylesheet', function () {
     before(function () {
-      // Create a stylesheet and save the HTML of the page
-      this.styleSheet = cssControls.createStyleSheet();
+      // Save the page HTML and create our stylesheet
       this.html = docElt.innerHTML;
+      this.styleSheet = cssControls.createStyleSheet();
     });
 
-    it('can be appended to the DOM', function () {
-      head.appendChild(this.styleSheet);
-    });
-
-    it('adds a <style> tag when appended to the DOM', function () {
+    it('appended <style> a tag to the DOM', function () {
       assert.notEqual(docElt.innerHTML, this.html);
     });
 
