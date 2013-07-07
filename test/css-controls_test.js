@@ -20,7 +20,19 @@ describe('css-controls', function () {
     });
 
     it('can be found in document.styleSheets', function () {
-      assert.strictEqual(document.styleSheets[document.styleSheets.length - 1], this.styleSheet);
+      // Iterate over the document style sheets
+      var styleSheets = document.styleSheets,
+          foundSheet = false,
+          i = styleSheets.length;
+      while (i--) {
+        // If it matches, take note and return
+        // DEV: .ownerNode is how we go from CSSStyleSheet to HTMLStyleSheet
+        if (document.styleSheets[i].ownerNode === this.styleSheet) {
+          foundSheet = true;
+          break;
+        }
+      }
+      assert.strictEqual(foundSheet, true);
     });
   });
 
