@@ -26,12 +26,13 @@
     "node": ">= 0.6.0"
   },
   "scripts": {
-    "test": "mocha"
+    "build": "browserify test/css-controls_test.js --outfile test/css-controls_test.browserify.js",
+    "test": "testem"
   },
   "dependencies": {},
   "devDependencies": {
     "grunt": "~0.3.17",
-    "mocha": "~1.11.0"
+    "browserify": "~2.23.1"
   },
   "keywords": [
     "cross-browser",

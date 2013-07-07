@@ -11,7 +11,7 @@ describe('css-controls', function () {
     });
 
     it('can be appended to the DOM', function () {
-      head.appendChld(this.styleSheet);
+      head.appendChild(this.styleSheet);
     });
 
     it('adds a <style> tag when appended to the DOM', function () {
