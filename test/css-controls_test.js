@@ -58,7 +58,6 @@ describe('css-controls', function () {
       fixtureNode('p');
       before(function () {
         this.node.className = 'style-me';
-        console.log(this.node);
       });
 
       it('is styled', function () {
