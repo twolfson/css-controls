@@ -6,7 +6,7 @@ module.exports = {
       throw new Error(msg);
     }
   },
-  notEqual: function (a, b) {
+  notEqual: function (a, b, msg) {
     if (a == b) {
       msg = msg || ('Assertion error: ' + a + ' == ' + b);
       throw new Error(msg);
