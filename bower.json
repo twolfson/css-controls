@@ -1,0 +1,10 @@
+{
+  "name": "css-controls",
+  "version": "0.1.0",
+  "main": "dist/css-controls.js",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "components"
+  ]
+}
