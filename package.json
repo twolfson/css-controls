@@ -1,0 +1,43 @@
+{
+  "name": "css-controls",
+  "description": "Cross-browser stylesheet creation and css rule creation/deletion (includes IE6 support)",
+  "version": "0.1.0",
+  "homepage": "https://github.com/twolfson/css-controls",
+  "author": {
+    "name": "Todd Wolfson",
+    "email": "todd@twolfson.com",
+    "url": "http://twolfson.com/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/twolfson/css-controls.git"
+  },
+  "bugs": {
+    "url": "https://github.com/twolfson/css-controls/issues"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/twolfson/css-controls/blob/master/LICENSE-MIT"
+    }
+  ],
+  "main": "lib/css-controls",
+  "engines": {
+    "node": ">= 0.6.0"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "grunt": "~0.3.17",
+    "mocha": "~1.11.0"
+  },
+  "keywords": [
+    "cross-browser",
+    "stylesheet",
+    "css",
+    "rule",
+    "browser"
+  ]
+}
