@@ -16,16 +16,14 @@ describe('css-controls', function () {
       assert.notEqual(docElt.innerHTML, this.html);
     });
 
-    // TODO: Skipping this for now as it will be proven out by CSS rule tests
-    it.skip('can be found in document.styleSheets', function () {
+    it('can be found in document.styleSheets', function () {
       // Iterate over the document style sheets
       var styleSheets = document.styleSheets,
           foundSheet = false,
           i = styleSheets.length;
       while (i--) {
         // If it matches, take note and return
-        // DEV: .ownerNode is how we go from CSSStyleSheet to HTMLStyleSheet
-        if (styleSheets[i].ownerNode === this.styleSheet) {
+        if (styleSheets[i] === this.styleSheet) {
           foundSheet = true;
           break;
         }
