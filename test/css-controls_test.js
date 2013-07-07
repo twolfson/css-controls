@@ -1,11 +1,13 @@
 var cssControls = require('../lib/css-controls.js'),
     assert = require('./utils/assert'),
     docElt = document.documentElement,
-    head = document.getElementsByTagName('head')[0];
+    head = document.getElementsByTagName('head')[0],
+    body = document.body;
 
 describe('css-controls', function () {
   describe('creating a stylesheet', function () {
     before(function () {
+      // Create a stylesheet and save the HTML of the page
       this.styleSheet = cssControls.createStyleSheet();
       this.html = docElt.innerHTML;
     });
@@ -15,11 +17,11 @@ describe('css-controls', function () {
     });
 
     it('adds a <style> tag when appended to the DOM', function () {
-      console.log(docElt.innerHTML);
       assert.notEqual(docElt.innerHTML, this.html);
     });
 
-    it('can be found in document.styleSheets', function () {
+    // TODO: Skipping this for now as it will be proven out by CSS rule tests
+    it.skip('can be found in document.styleSheets', function () {
       // Iterate over the document style sheets
       var styleSheets = document.styleSheets,
           foundSheet = false,
@@ -27,7 +29,7 @@ describe('css-controls', function () {
       while (i--) {
         // If it matches, take note and return
         // DEV: .ownerNode is how we go from CSSStyleSheet to HTMLStyleSheet
-        if (document.styleSheets[i].ownerNode === this.styleSheet) {
+        if (styleSheets[i].ownerNode === this.styleSheet) {
           foundSheet = true;
           break;
         }
@@ -37,6 +39,9 @@ describe('css-controls', function () {
   });
 
   describe('adding a CSS rule', function () {
+    before(function () {
+      cssControls.addRule(this.styleSheet, '.style-me', 'font-size: 50px');
+    });
     it('styles relevant elements', function () {
 
     });
