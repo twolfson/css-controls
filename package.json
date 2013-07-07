@@ -28,7 +28,7 @@
   "scripts": {
     "build-test": "npm run build && browserify test/css-controls_test.js --outfile test/css-controls_test.browserify.js",
     "build": "browserify lib/css-controls.js --standalone css-controls --outfile dist/css-controls.js",
-    "test": "testem"
+    "test": "testem ci"
   },
   "dependencies": {},
   "devDependencies": {
@@ -36,7 +36,8 @@
     "browserify": "~2.23.1",
     "computed-style": "~0.1.3",
     "mocha": "~1.12.0",
-    "testem": "~0.3.12"
+    "testem": "~0.3.12",
+    "underscore": "~1.4.4"
   },
   "keywords": [
     "cross-browser",
