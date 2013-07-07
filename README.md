@@ -14,25 +14,25 @@ This was created to be a well-tested cross-browser library for basic CSS stylesh
 - [component][component], `component install css-controls`
 - [Download via HTTP][download]
 
-[npm]:
-[bower]:
-[component]:
-[download]:
+[npm]: http://npmjs.org/
+[bower]: http://bower.io/
+[component]: http://component.io/
+[download]: https://raw.github.com/twolfson/css-controls/master/dist/css-controls.js
 
 For `npm` and `component`, you can load it in as follows:
 ```javascript
 var cssControls = require('css-controls');
-cssControls
 ```
 
 For `bower` and `http`, you can use vanilla JS
 ```html
 <script src="components/css-controls.js"></script>
+window.cssControls; // `css-controls` is defined on `window` in camelCase
 ```
 
 or you can use [AMD][amd]
 
-[amd]:
+[amd]: http://wiki.commonjs.org/wiki/Modules/AsynchronousDefinition
 
 ```js
 require(['css-controls'], funtion (cssControls) { /* code */ });
@@ -40,7 +40,7 @@ require(['css-controls'], funtion (cssControls) { /* code */ });
 
 or [CommonJS][commonjs] syntax (see `npm`/`component` section).
 
-[commonjs]:
+[commonjs]: http://wiki.commonjs.org/wiki/Modules/1.0
 
 Once you have the module loaded, you can create new style sheets and add/remove CSS rules.
 
@@ -62,12 +62,36 @@ cssControls.removeRule(ruleIndex); // Equivalent to cssControls.removeRule(sheet
 `css-controls` returns 3 cross-browser functions.
 
 ```js
+cssControls.createStyleSheet();
+/**
+ * Create and append stylesheet to DOM
+ * @returns {CSSStyleElement} Created stylesheet
+ */
+```
 
+```js
+cssControls.addRule(styleSheet, selector, property);
+/**
+ * Add a CSS rule to a stylesheet
+ * @param {CSSStyleElement} styleSheet Stylesheet to add rule to
+ * @param {String} selector CSS selector (e.g. `.nav > .nav-bar`)
+ * @param {String} property CSS property to apply to `selector` (e.g. `background: blue`)
+ * @returns {Number} Index the rule was inserted at
+ */
+```
+
+```js
+cssControls.removeRule(styleSheet, index);
+/**
+ * Remove a CSS rule from a stylesheet
+ * @param {CSSStyleElement} styleSheet Stylesheet to remove rule from
+ * @param {Numer} index Index of the rule to remove
+ */
 ```
 
 A large amount of the background knowledge came from [quirksmode][quirksmode].
 
-[quirksmode]:
+[quirksmode]: http://www.quirksmode.org/dom/w3c_css.html
 
 ## Examples
 `css-controls` can be used with `document.styleSheets` as these are `CSSStyleElements`
