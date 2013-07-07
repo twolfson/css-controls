@@ -1,9 +1,13 @@
+// Load in dependencies
 var cssControls = require('../lib/css-controls.js'),
-    assert = require('./utils/assert'),
-    docElt = document.documentElement,
-    head = document.getElementsByTagName('head')[0],
-    body = document.body;
+    computedStyle = require('computed-style'),
+    assert = require('./utils/assert');
 
+// Localize common elements
+var docElt = document.documentElement,
+    head = document.getElementsByTagName('head')[0];
+
+// Basic tests
 describe('css-controls', function () {
   describe('creating a stylesheet', function () {
     before(function () {
@@ -34,14 +38,38 @@ describe('css-controls', function () {
 
   describe('adding a CSS rule', function () {
     before(function () {
-      cssControls.addRule(this.styleSheet, '.style-me', 'font-size: 50px');
+      this.ruleIndex = cssControls.addRule(this.styleSheet, '.style-me', 'font-size: 50px');
     });
     it('styles relevant elements', function () {
+      // Create and append our test element
+      var body = document.body,
+          p = document.createElement('p');
+      p.className = 'style-me';
+      body.appendChild(p);
 
+      // Get the element style and assert
+      var fontSize = computedStyle(p, 'font-size');
+      assert.strictEqual(fontSize, '50px');
+
+      // Remove the element from the DOM
+      body.removeChild(p);
+
+      // Save the styled element for later
+      this.styledElt = p;
     });
 
     it('does not style non-relevant elements', function () {
+      // Create and append our test element
+      var body = document.body,
+          p = document.createElement('p');
+      body.appendChild(p);
 
+      // Get the element style and assert
+      var fontSize = computedStyle(p, 'font-size');
+      assert.notEqual(fontSize, '50px');
+
+      // Remove the element from the DOM
+      body.removeChild(p);
     });
   });
 

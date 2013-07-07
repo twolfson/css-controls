@@ -32,7 +32,8 @@
   "dependencies": {},
   "devDependencies": {
     "grunt": "~0.3.17",
-    "browserify": "~2.23.1"
+    "browserify": "~2.23.1",
+    "computed-style": "~0.1.3"
   },
   "keywords": [
     "cross-browser",
