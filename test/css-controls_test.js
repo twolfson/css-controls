@@ -1,5 +1,5 @@
 // Load in dependencies
-var cssControls = require('../lib/css-controls.js'),
+var cssControls = require('../dist/css-controls.js'),
     computedStyle = require('computed-style'),
     assert = require('./utils/assert');
 
