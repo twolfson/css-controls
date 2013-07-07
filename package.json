@@ -26,7 +26,9 @@
     "node": ">= 0.6.0"
   },
   "scripts": {
-    "build": "browserify test/css-controls_test.js --outfile test/css-controls_test.browserify.js",
+    "build-test": "browserify test/css-controls_test.js --outfile test/css-controls_test.browserify.js",
+    "build": "browserify lib/css-controls.js --standalone css-controls --outfile dist/css-controls.js",
+    "prepublish": "npm run build",
     "test": "testem"
   },
   "dependencies": {},

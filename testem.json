@@ -1,6 +1,6 @@
 {
   "framework": "mocha",
-  "before_tests": "npm run build",
+  "before_tests": "npm run build-test",
   "src_files": [
     "lib/css-controls.js",
     "test/css-controls_test.js"
