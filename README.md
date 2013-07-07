@@ -2,6 +2,8 @@
 
 Cross-browser stylesheet creation and css rule creation/deletion (includes IE6 support)
 
+[![browser support](https://ci.testling.com/twolfson/css-controls.png)](https://ci.testling.com/twolfson/css-controls)
+
 ## Getting Started
 Install the module with: `npm install css-controls`
 
