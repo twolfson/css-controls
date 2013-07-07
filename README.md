@@ -96,7 +96,7 @@ A large amount of the background knowledge came from [quirksmode][quirksmode].
 ## Examples
 `css-controls` can be used with `document.styleSheets` as these are `CSSStyleElements`
 
-```
+```js
 // Color the `body` via the first stylesheet
 var sheet = document.styleSheets[0];
 cssControls.addRule(sheet, 'body', 'background: papayawhip');
