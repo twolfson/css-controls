@@ -2,7 +2,10 @@
 return (function(e,t,n){function i(n,s){if(!t[n]){if(!e[n]){var o=typeof require=="function"&&require;if(!s&&o)return o(n,!0);if(r)return r(n,!0);throw new Error("Cannot find module '"+n+"'")}var u=t[n]={exports:{}};e[n][0].call(u.exports,function(t){var r=e[n][1][t];return i(r?r:t)},u,u.exports)}return t[n].exports}var r=typeof require=="function"&&require;for(var s=0;s<n.length;s++)i(n[s]);return i})({1:[function(require,module,exports){
 // Attribution for majority of information http://www.quirksmode.org/dom/w3c_css.html
 
-// Define styleSheet creator
+/**
+ * Create and append stylesheet to DOM
+ * @returns {CSSStyleElement} Created stylesheet
+ */
 function createStyleSheet() {
   // If we are on IE, use createStyleSheet
   if (document.createStyleSheet) {
@@ -16,7 +19,13 @@ function createStyleSheet() {
   }
 }
 
-// Define rule adder
+/**
+ * Add a CSS rule to a stylesheet
+ * @param {CSSStyleElement} styleSheet Stylesheet to add rule to
+ * @param {String} selector CSS selector (e.g. `.nav > .nav-bar`)
+ * @param {String} property CSS property to apply to `selector` (e.g. `background: blue`)
+ * @returns {Number} Index the rule was inserted at
+ */
 function addRule(styleSheet, selector, property) {
   // if we are on IE, use addRule
   if (styleSheet.addRule) {
@@ -29,7 +38,11 @@ function addRule(styleSheet, selector, property) {
   }
 }
 
-// Define rule removal
+/**
+ * Remove a CSS rule from a stylesheet
+ * @param {CSSStyleElement} styleSheet Stylesheet to remove rule from
+ * @param {Numer} index Index of the rule to remove
+ */
 function removeRule(styleSheet, index) {
   // if we are on IE, use removeRule
   if (styleSheet.removeRule) {
